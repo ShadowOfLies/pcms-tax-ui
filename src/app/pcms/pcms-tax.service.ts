@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TaxBreakdown } from './data/pcms-data';
 
-const PCMS_TAX_EP = 'http://localhost:8080/ZA/income-tax/';
+const PCMS_TAX_EP = 'http://localhost:8080/api/ZA/income-tax/';
 
 @Injectable()
 export class PcmsTaxService {
@@ -10,13 +11,14 @@ export class PcmsTaxService {
         private http: HttpClient
     ) {}
 
-    getTaxBreakdown(annual: boolean): Promise<TaxBreakdown> {
+    getTaxBreakdown(annual: boolean, amount: number): Promise<TaxBreakdown> {
         let country = 'ZA';
 
         let period = annual ? 'ANNUALLY' : 'MONTHLY';
 
         return this.http
-            .get<TaxBreakdown>(PCMS_TAX_EP + period, { headers: this.buildHttpHeaders() })
+            .get<TaxBreakdown>(PCMS_TAX_EP + period, 
+                { headers: this.buildHttpHeaders(), params: {'income': String(amount)} } )
             .toPromise<TaxBreakdown>();
     }
 
@@ -26,13 +28,4 @@ export class PcmsTaxService {
             'Content-Type': 'application/json'
         })
     }
-}
-
-export interface TaxBreakdown {
-    grossAnnual: number;
-    grossMonthly: number;
-    netAnnual: number;
-    netMonthly: number;
-    annualTaxPaid: number;
-    monthlyTaxPaid: number;
 }

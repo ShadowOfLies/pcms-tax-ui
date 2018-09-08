@@ -1,0 +1,49 @@
+<div class="container pad-top">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col m4 offset-m2 s12">
+                    <input id="gross_salary" name="gross_salary" [(ngModel)]="incomeAmount" type="number" class="validate">
+                    <label for="gross_salary" class="active">Gross Salary</label>
+                </div>
+                <div class="input-field col m2 s12">
+                    <select id="salary_type" name="salary_type" [(ngModel)]="annual">
+                        <option value="ANNUALLY">Annual</option>
+                        <option value="MONTHLY">Monthly</option>
+                    </select>
+                    <label>Type</label>
+                </div>
+                <div class="col m2 s12 right-align pad-top-20">
+                    <a class="waves-effect waves-light btn" (click)="calculateTaxBreakdown()"><i class="material-icons right">send</i>Calc</a>
+                </div>
+            </div>
+        </form>
+        <br>
+        <ng-container *ngIf="hasBreakdown()">
+            <div class="row">
+                <div class="col m3 offset-m2 s12">Gross Annual Salary:</div>
+                <div class="col m3 s12">{{taxBreakdown.grossAnnual}}</div>
+            </div>
+            <div class="row">
+                <div class="col m3 offset-m2 s12">Gross Monthly Salary:</div>
+                <div class="col m3 s12">{{taxBreakdown.grossMonthly}}</div>
+            </div>
+            <div class="row">
+                <div class="col m3 offset-m2 s12">Net Annual Salary:</div>
+                <div class="col m3 s12">{{taxBreakdown.netAnnual}}</div>
+            </div>
+            <div class="row">
+                <div class="col m3 offset-m2 s12">Net Monthly Salary:</div>
+                <div class="col m3 s12">{{taxBreakdown.netMonthly}}</div>
+            </div>
+            <div class="row">
+                <div class="col m3 offset-m2 s12">Annual Tax Paid:</div>
+                <div class="col m3 s12">{{taxBreakdown.annualTaxPaid}}</div>
+            </div>
+            <div class="row">
+                <div class="col m3 offset-m2 s12">Monthly Tax Paid:</div>
+                <div class="col m3 s12">{{taxBreakdown.monthlyTaxPaid}}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from 'app/app.component';
 import { AppRoutingModule } from 'app/app-routing.module';
 
-import { HomeComponent, TaxCalculatorComponent } from 'app/pcms'
+import { HomeComponent, PcmsTaxService, TaxCalculatorComponent } from 'app/pcms'
 
 @NgModule({
   declarations: [
@@ -21,7 +21,9 @@ import { HomeComponent, TaxCalculatorComponent } from 'app/pcms'
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PcmsTaxService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
